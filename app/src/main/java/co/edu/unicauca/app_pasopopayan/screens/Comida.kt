@@ -1,6 +1,7 @@
 package co.edu.unicauca.app_pasopopayan.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -43,6 +45,18 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         modifier
             .verticalScroll(rememberScrollState())
     ) {
+        Spacer(Modifier.height(16.dp))
+        Column (
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.logoapp_comp),
+                contentDescription = null,
+                modifier = Modifier.width(600.dp),
+            )
+        }
         Spacer(Modifier.height(16.dp))
         SearchBar(Modifier.padding(horizontal = 16.dp))
         Spacer(Modifier.height(16.dp))

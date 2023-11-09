@@ -52,6 +52,7 @@ fun ArtesaniaScreen(modifier: Modifier = Modifier) {
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(Modifier.height(16.dp))
         Column (
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,

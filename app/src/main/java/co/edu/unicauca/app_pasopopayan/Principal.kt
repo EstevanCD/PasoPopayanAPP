@@ -52,6 +52,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import co.edu.unicauca.app_pasopopayan.screens.Artesania
+import co.edu.unicauca.app_pasopopayan.screens.Comida
+import co.edu.unicauca.app_pasopopayan.screens.Hotel
+import co.edu.unicauca.app_pasopopayan.screens.StartOrderScreen
 import co.edu.unicauca.app_pasopopayan.ui.theme.App_PasoPopayanTheme
 
 @Composable
@@ -465,8 +469,13 @@ fun NavigationRailPreview() {
     App_PasoPopayanTheme { SootheNavigationRail() }
 }
 */
+
 @Preview(widthDp = 360, heightDp = 640)
 @Composable
 fun PasoPopayanPortraitPreview() {
-    PasoPopayanAppPortrait()
+    //PasoPopayanAppPortrait()
+    Comida()
+    //Artesania()
+    //Hotel()
+    //StartOrderScreen()
 }
