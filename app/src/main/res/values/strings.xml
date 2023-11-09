@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">app_PasoPopayan</string>
+    <string name="img_jesus_1">Inversions</string>
+
+    <string name="seccion_logo"></string>
+    <string name="seccion_uno">Lugares Turisticos</string>
+    <string name="seccion_dos">Intereses</string>
+
+    <string name="bottom_navigation_profile">Perfil</string>
+    <string name="bottom_navigation_home">Inicio</string>
+
+    <string name="img_iglesias">Iglesias</string>
+    <string name="img_museos">Museos</string>
+    <string name="img_monumentos">Monumentos</string>
+
+    <string name="img_historia">Historia</string>
+    <string name="img_descubrir_lugares">Descubrir Lugares</string>
+    <string name="img_opiniones">Opiniones</string>
+
+    <string name="img_procesiones">Procesiones</string>
+    <string name="img_comida">Comida</string>
+    <string name="img_artesanias">Artesanias</string>
+    <string name="img_hoteles">Hoteles</string>
+
+    <string name="img_lunes">Lunes Santo</string>
+    <string name="img_martes">Martes Santo</string>
+    <string name="img_miercoles">Miercoles Santo</string>
+    <string name="img_jueves">Jueves Santo</string>
+    <string name="img_viernes">Viernes Santo</string>
+    <string name="img_sabado">Sabado Santo</string>
+    <string name="img_domingo">Domingo Santo</string>
+    <string name="img_logo">Logo</string>
+
+    <string name="img_santoDomingo">Santo Domingo</string>
+    <string name="img_inem">Inem</string>
+    <string name="img_bolivar">Barrio Bolivar</string>
+    <string name="img_Cmoneda">Casa de la Moneda</string>
+    <string name="img_Bomberos">Bomberos</string>
+    <string name="img_Exito">Parqueadero Exito</string>
+
+    <string name="icon_busqueda">Buscar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
