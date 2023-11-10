@@ -5,6 +5,7 @@
     <string name="seccion_logo"></string>
     <string name="seccion_uno">Lugares Turisticos</string>
     <string name="seccion_dos">Intereses</string>
+    <string name="seccion_tres">Clima</string>
 
     <string name="bottom_navigation_profile">Perfil</string>
     <string name="bottom_navigation_home">Inicio</string>

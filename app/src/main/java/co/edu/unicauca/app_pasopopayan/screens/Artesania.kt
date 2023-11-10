@@ -32,21 +32,25 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 import co.edu.unicauca.app_pasopopayan.HomeSection
 import co.edu.unicauca.app_pasopopayan.R
 import co.edu.unicauca.app_pasopopayan.SearchBar
+import co.edu.unicauca.app_pasopopayan.SootheBottomNavigation
 import co.edu.unicauca.app_pasopopayan.ui.theme.App_PasoPopayanTheme
 
 @Composable
-fun Artesania() {
-    Scaffold() {
-        ArtesaniaScreen()
+fun Artesania(navController: NavController) {
+    Scaffold(
+        bottomBar = { SootheBottomNavigation(navController) }
+    ) {
+        ArtesaniaScreen(navController)
     }
 }
 
 @Composable
-fun ArtesaniaScreen(modifier: Modifier = Modifier) {
+fun ArtesaniaScreen(navController: NavController,modifier: Modifier = Modifier) {
     Column(
         modifier
             .verticalScroll(rememberScrollState()),
@@ -65,7 +69,7 @@ fun ArtesaniaScreen(modifier: Modifier = Modifier) {
             )
         }
         Spacer(Modifier.height(16.dp))
-        SearchBar(Modifier.padding(horizontal = 16.dp))
+        SearchBar(navController,Modifier.padding(horizontal = 16.dp))
         Spacer(Modifier.height(16.dp))
         Text(
             text = stringResource(R.string.img_artesanias),
@@ -74,12 +78,13 @@ fun ArtesaniaScreen(modifier: Modifier = Modifier) {
                 .paddingFromBaseline(top = 40.dp, bottom = 16.dp)
                 .padding(horizontal = 16.dp)
         )
-        App_PasoPopayanTheme { FavoriteCollectionsGridArt() }
+        App_PasoPopayanTheme { FavoriteCollectionsGridArt(navController) }
     }
 }
 
 @Composable
 fun CollectionCardArt(
+    navController: NavController,
     @DrawableRes drawable: Int,
     @StringRes text: Int,
     modifier: Modifier = Modifier
@@ -110,6 +115,7 @@ fun CollectionCardArt(
 
 @Composable
 fun FavoriteCollectionsGridArt(
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -118,7 +124,7 @@ fun FavoriteCollectionsGridArt(
 
     ) {
         favoriteCollectionsDataArt.forEach { item ->
-            CollectionCardArt(item.drawable, item.text, Modifier.height(80.dp))
+            CollectionCardArt(navController,item.drawable, item.text, Modifier.height(80.dp))
         }
     }
 }
@@ -138,9 +144,10 @@ private data class DrawableStringPairArt(
     @DrawableRes val drawable: Int,
     @StringRes val text: Int
 )
-
+/*
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreviewArt(){
     Artesania()
 }
+*/

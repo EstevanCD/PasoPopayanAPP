@@ -3,6 +3,7 @@ package co.edu.unicauca.app_pasopopayan
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -52,23 +53,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import co.edu.unicauca.app_pasopopayan.screens.Artesania
-import co.edu.unicauca.app_pasopopayan.screens.Comida
-import co.edu.unicauca.app_pasopopayan.screens.Hotel
-import co.edu.unicauca.app_pasopopayan.screens.StartOrderScreen
+import androidx.navigation.NavController
+import co.edu.unicauca.app_pasopopayan.navegation.AppScreens
+import co.edu.unicauca.app_pasopopayan.screens.WeatherCard
 import co.edu.unicauca.app_pasopopayan.ui.theme.App_PasoPopayanTheme
 
 @Composable
-fun PasoPopayanAppPortrait() {
+fun PasoPopayanAppPortrait(navController: NavController) {
     App_PasoPopayanTheme {
         Scaffold(
-            bottomBar = { SootheBottomNavigation() }
+            bottomBar = { SootheBottomNavigation(navController) }
         ) { padding ->
-            PrincipalScreen(Modifier.padding(padding))
+            PrincipalScreen(navController,Modifier.padding(padding))
         }
     }
 }
-
+/*
 @Composable
 fun PasoPopayanAppLandscape(){
     App_PasoPopayanTheme {
@@ -79,7 +79,7 @@ fun PasoPopayanAppLandscape(){
             }
         }
     }
-}
+}*/
 
 
 @Composable
@@ -123,7 +123,7 @@ private fun SootheNavigationRail(modifier: Modifier = Modifier) {
         }
     }
 }
-
+/*
 @Composable
 fun PasoPopayanApp(windowSize: WindowSizeClass) {
     when (windowSize.widthSizeClass) {
@@ -131,14 +131,14 @@ fun PasoPopayanApp(windowSize: WindowSizeClass) {
             PasoPopayanAppPortrait()
         }
         WindowWidthSizeClass.Expanded -> {
-            PasoPopayanAppLandscape()
+            //PasoPopayanAppLandscape()
         }
     }
-}
+}*/
 
 // Step: Bottom navigation - Material
 @Composable
-private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
+public fun SootheBottomNavigation(navController: NavController,modifier: Modifier = Modifier) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.surfaceVariant,
         modifier = modifier
@@ -147,7 +147,10 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
             icon = {
                 Icon(
                     imageVector = Icons.Default.Home,
-                    contentDescription = null
+                    contentDescription = null,
+                    modifier = Modifier.clickable {
+                        navController.navigate(AppScreens.Inicio.route)
+                    }
                 )
             },
             label = {
@@ -174,6 +177,7 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
 
 @Composable
 fun SearchBar(
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -185,7 +189,9 @@ fun SearchBar(
         Icon(
             imageVector = Icons.Default.ArrowBack,
             contentDescription = null,
-            modifier = Modifier.padding(horizontal = 16.dp)
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .clickable { navController.popBackStack() }
         )
 
         TextField(
@@ -214,14 +220,16 @@ fun SearchBar(
 
 @Composable
 fun FavoriteCollectionCard(
+    navController: NavController,
     @DrawableRes drawable: Int,
     @StringRes text: Int,
+    ruta: String,
     modifier: Modifier = Modifier
 ) {
     Surface(
         shape = MaterialTheme.shapes.medium,
         color = MaterialTheme.colorScheme.surfaceVariant,
-        modifier = modifier
+        modifier = modifier.clickable { navController.navigate(ruta) }
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -276,6 +284,7 @@ fun LogoCollectionCard(
 
 @Composable
 fun FavoriteCollectionsGrid(
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     LazyHorizontalGrid(
@@ -286,13 +295,14 @@ fun FavoriteCollectionsGrid(
         modifier = modifier.height(168.dp)
     ) {
         items(favoriteCollectionsData) { item ->
-            FavoriteCollectionCard(item.drawable, item.text, Modifier.height(80.dp))
+            FavoriteCollectionCard(navController,item.imageResource, item.stringResource,item.navigationPath, Modifier.height(80.dp))
         }
     }
 }
 
 @Composable
 fun HomeSection(
+    navController: NavController,
     @StringRes title: Int,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
@@ -311,12 +321,13 @@ fun HomeSection(
 
 @Composable
 fun AlignYourBodyElement(
+    navController: NavController,
     @DrawableRes drawable: Int,
     @StringRes text: Int,
-    modifier: Modifier = Modifier
+    ruta: String
 ) {
     Column(
-        modifier = modifier,
+        modifier = Modifier.clickable { navController.navigate(ruta) },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
@@ -337,6 +348,7 @@ fun AlignYourBodyElement(
 
 @Composable
 fun AlignYourBodyRow(
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     LazyRow(
@@ -345,41 +357,48 @@ fun AlignYourBodyRow(
         modifier = modifier
     ) {
         items(alignYourBodyData) { item ->
-            AlignYourBodyElement(item.drawable, item.text)
+            AlignYourBodyElement(navController,item.imageResource, item.stringResource,item.navigationPath)
         }
     }
 }
 
 @Composable
-fun PrincipalScreen(modifier: Modifier = Modifier) {
+fun PrincipalScreen(navController: NavController, modifier: Modifier = Modifier) {
     Column(
         modifier
             .verticalScroll(rememberScrollState())
     ) {
         Spacer(Modifier.height(16.dp))
-        SearchBar(Modifier.padding(horizontal = 16.dp))
-        HomeSection(title = R.string.seccion_uno) {
-            AlignYourBodyRow()
+        SearchBar(navController,Modifier.padding(horizontal = 16.dp))
+        HomeSection(navController,title = R.string.seccion_uno) {
+            AlignYourBodyRow(navController)
         }
-        HomeSection(title = R.string.seccion_dos) {
-            FavoriteCollectionsGrid()
+        HomeSection(navController,title = R.string.seccion_dos) {
+            FavoriteCollectionsGrid(navController)
         }
-        Spacer(Modifier.height(16.dp))
+        HomeSection(navController,title = R.string.seccion_tres) {
+            WeatherCard()
+        }
     }
 }
+data class PlaceData(
+    val imageResource: Int,
+    val stringResource: Int,
+    val navigationPath: String
+)
 
 private val alignYourBodyData = listOf(
-    R.drawable.logoapp to R.string.img_iglesias,
-    R.drawable.logoapp to R.string.img_museos,
-    R.drawable.logoapp to R.string.img_monumentos
-).map { DrawableStringPair(it.first, it.second) }
+    PlaceData(R.drawable.logoapp,R.string.img_iglesias,AppScreens.Comida.route),
+    PlaceData(R.drawable.logoapp,R.string.img_museos,AppScreens.Artesania.route),
+    PlaceData(R.drawable.logoapp,R.string.img_monumentos,AppScreens.Hotel.route),
+)
 
 private val favoriteCollectionsData = listOf(
-    R.drawable.jesus_1 to R.string.img_comida,
-    R.drawable.jesus_1 to R.string.img_artesanias,
-    R.drawable.jesus_1 to R.string.img_procesiones,
-    R.drawable.jesus_1 to R.string.img_hoteles
-).map { DrawableStringPair(it.first, it.second) }
+    PlaceData(R.drawable.jesus_1,R.string.img_procesiones,AppScreens.Procesion.route),
+    PlaceData(R.drawable.carantanta,R.string.img_comida,AppScreens.Comida.route),
+    PlaceData(R.drawable.s_domingo,R.string.img_artesanias,AppScreens.Artesania.route),
+    PlaceData(R.drawable.j2,R.string.img_hoteles,AppScreens.Hotel.route),
+)
 
 private data class DrawableStringPair(
     @DrawableRes val drawable: Int,
@@ -474,8 +493,9 @@ fun NavigationRailPreview() {
 @Composable
 fun PasoPopayanPortraitPreview() {
     //PasoPopayanAppPortrait()
-    Comida()
+    //Comida()
     //Artesania()
     //Hotel()
     //StartOrderScreen()
+    WeatherCard()
 }

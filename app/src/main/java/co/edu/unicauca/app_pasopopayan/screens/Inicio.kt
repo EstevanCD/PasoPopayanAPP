@@ -2,6 +2,7 @@ package co.edu.unicauca.app_pasopopayan.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -28,15 +30,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import co.edu.unicauca.app_pasopopayan.R
+import co.edu.unicauca.app_pasopopayan.navegation.AppScreens
 
 
 @Composable
 fun StartOrderScreen(
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     var username by remember { mutableStateOf(TextFieldValue()) }
     var password by remember { mutableStateOf(TextFieldValue()) }
+
     Box(
         modifier = modifier.fillMaxSize()
     ) {
@@ -108,24 +114,37 @@ fun StartOrderScreen(
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            StartButton(onClick = { /*TODO*/ })
+            StartButton(navController)
         }
     }
 }
 
 @Composable
 fun StartButton(
-    onClick: () -> Unit,
+    navController: NavController,
     modifier: Modifier = Modifier
 ){
     Button(
-        onClick = onClick,
+        onClick = {
+            // Aquí puedes manejar la lógica de inicio de sesión
+            // Por ejemplo, validar las credenciales, navegar a la siguiente pantalla, etc.
+        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+    ) {
+        Text("REGISTRARME")
+    }
+    Button(
+        onClick = {
+                  navController.navigate(route = AppScreens.Inicio.route)
+        },
         modifier = modifier.widthIn(min = 250.dp)
     ) {
         Text("CONTINUAR COMO INVITADO")
     }
 }
-
+/*
 @Preview
 @Composable
 fun StartOrderPreview(){
@@ -134,4 +153,4 @@ fun StartOrderPreview(){
             .fillMaxSize()
             .padding(16.dp)
     )
-}
+}*/
