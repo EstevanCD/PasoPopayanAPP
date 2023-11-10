@@ -18,11 +18,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             App_PasoPopayanTheme {
                 val windowSizeClass = calculateWindowSizeClass(this)
-                //PasoPopayanApp(windowSizeClass)
-                //Comida()
-                //Hotel()
-                //Artesania()
-                //StartOrderScreen()
                 AppNavigation()
             }
         }
