@@ -379,6 +379,12 @@ fun PrincipalScreen(navController: NavController, modifier: Modifier = Modifier)
         HomeSection(navController,title = R.string.seccion_tres) {
             WeatherCard()
         }
+        Text(
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .clickable { navController.navigate(AppScreens.Creditos.route) },
+            text = "¿Quienes somos?"
+        )
     }
 }
 data class PlaceData(

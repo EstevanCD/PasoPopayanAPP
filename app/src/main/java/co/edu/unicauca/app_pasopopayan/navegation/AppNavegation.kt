@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import co.edu.unicauca.app_pasopopayan.PasoPopayanAppPortrait
 import co.edu.unicauca.app_pasopopayan.screens.Artesania
 import co.edu.unicauca.app_pasopopayan.screens.Comida
+import co.edu.unicauca.app_pasopopayan.screens.Creditos
 import co.edu.unicauca.app_pasopopayan.screens.Hotel
 import co.edu.unicauca.app_pasopopayan.screens.Procesion
 import co.edu.unicauca.app_pasopopayan.screens.StartOrderScreen
@@ -32,6 +33,9 @@ fun AppNavigation() {
         }
         composable(route=AppScreens.Procesion.route){
             Procesion(navController)
+        }
+        composable(route=AppScreens.Creditos.route){
+            Creditos(navController)
         }
     }
 }

@@ -119,7 +119,6 @@ fun HotelElevatedCard(imagen:Int,tituloTexto:String,navController: NavController
         )
         IconWithText()
         FilledButtonExample(miAccion)
-
     }
 }
 val miAccion: () -> Unit = {
